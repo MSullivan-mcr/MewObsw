@@ -40,7 +40,8 @@ public class EventRecorder {
       String[] row = (x.split(","));
       switch(Integer.valueOf((row[0]))) {
       case STEVE:
-        println(row[3]);
+    //   println(row[0]);
+     println(row[1].charAt(0), row[2], row[3], row[4]);
         if (!row[2].trim().equalsIgnoreCase("na")) {
           events.add(new Event(row[1].charAt(0), row[2], row[3], row[4]));
         }
@@ -49,7 +50,7 @@ public class EventRecorder {
         if (!row[2].trim().equalsIgnoreCase("na")) {
           userVars = String.join(",", new String[]{row[1], row[2], row[3], row[4]});
         }
-
+println(userVars);
         break;
       case LOG:
         events.add(new Event(row[1].charAt(0), row[2], row[3], row[4]));
@@ -76,12 +77,12 @@ public class EventRecorder {
     for (Event e : events) {
       if (Accelerometer==null)
       {    //Loading up the keys used if no accelerometer.
-        textSize(15);
+        textSize(12);
         fill(0);
         text("Keys Used in this File:", 170, 360);
         textSize(12);
         fill(0);
-        text(e.keyStroke+")"+" "+e.label, x, y);
+        text(e.keyStroke+" "+e.label, x, y);
         y+=15;
         rows++;
 
@@ -92,11 +93,11 @@ public class EventRecorder {
         }
       } else {
 
-        textSize(15);
+        textSize(12);
         fill(0);
         text("Accelerometer File:", 170, 390);
         //Loading the keys in different position  when accelerometer is available 
-        textSize(15);
+        textSize(12);
         fill(0);
         text("Keys Used in this File:", 700, 360);
         textSize(12);
@@ -127,7 +128,9 @@ public class EventRecorder {
       if (e.keyStroke == k) {
         // dont break out of loop incase multiple steves are required for a single keystokes
         try {
-          output.write(e.getOutputString(",") + "," + time + "," + duration + "," + userVars +  "\n" );
+
+                 output.write(e.getOutputString(",") + "," + time + "," + duration + "," + userVars +  "\n" );
+
           output.flush();
           logger.addLine(e.getGUIString() + "     " + secondsToMMSS((int)time), time, true);
         } 

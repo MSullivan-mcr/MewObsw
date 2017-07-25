@@ -11,7 +11,7 @@ public class ConfigMaker {
   ArrayList<ConfigRow> rows;
 
   Textlabel title;
-  Textfield txtEditMe1, txtEditMe2, txtEditMe3, txtEditMe4, txtEditMe5, txtEditMe6;
+  Textfield txtEditMe1, txtEditMe2, txtEditMe3, txtEditMe4;
   Button btnSave, btnBack;
 
 
@@ -68,24 +68,7 @@ public class ConfigMaker {
       .setCaptionLabel("") 
       .plugTo(this);
       
-    txtEditMe5 = gui.addTextfield("EditMe5")
-      .setPosition(450, 80)
-      .setColorBackground(0)
-      .setSize(100, 20)
-      .setFocus(true)
-      .setFont(cf1)
-      .setCaptionLabel("") 
-      .plugTo(this);
 
-
-    txtEditMe6 = gui.addTextfield("EditMe6")
-      .setPosition(560, 80)
-      .setColorBackground(0)
-      .setSize(100, 20)
-      .setFocus(true)
-      .setFont(cf1)
-      .setCaptionLabel("") 
-      .plugTo(this);
 
 
     btnSave = gui.addButton("Save")
@@ -109,7 +92,7 @@ public class ConfigMaker {
 
   public void drawNewRow() {
     Textfield keyField = gui.addTextfield(prefix + index +  "_key")
-      .setPosition(x, y+20)
+      .setPosition(x, y+175)
       .setColorBackground(0)
       .setSize(50, 20)
       .setFocus(true)
@@ -119,7 +102,7 @@ public class ConfigMaker {
 
 
     Textfield labelField = gui.addTextfield(prefix + index +  "_label")
-      .setPosition(x + 70, y+20)
+      .setPosition(x + 70, y+175)
       .setColorBackground(0)
       .setSize(200, 20)
       .setFont(cf1)
@@ -127,7 +110,7 @@ public class ConfigMaker {
       .plugTo(this);
 
     RadioButton r = gui.addRadioButton(prefix + index +  "_steve")
-      .setPosition(x+300, y+20)
+      .setPosition(x+300, y+175)
       .setSize(40, 20)
       .setItemsPerRow(2)
       .setColorBackground(0)
@@ -139,13 +122,13 @@ public class ConfigMaker {
       .plugTo(this);
 
     Textlabel state = gui.addLabel(prefix + index +  "_state")
-      .setPosition(x+340, y+20)
+      .setPosition(x+340, y+175)
       .setText("State")
       .setFont(createFont("Arial", 15))
       .plugTo(this);
 
     Textlabel event = gui.addLabel(prefix + index +  "_event")
-      .setPosition(x+430, y+20)
+      .setPosition(x+430, y+175)
       .setText("Event")
       .setFont(createFont("Arial", 15))
       .plugTo(this);
@@ -153,7 +136,7 @@ public class ConfigMaker {
     r.activate(0);
 
     Textfield megField = gui.addTextfield(prefix + index +  "_meg")
-      .setPosition(x + 510, y+20)
+      .setPosition(x + 510, y+175)
       .setColorBackground(0)
       .setSize(200, 20)
       .setFont(cf1)
@@ -174,7 +157,7 @@ public class ConfigMaker {
   public void drawAddButton(boolean hideButton) {
     if (addButton == null) {
       addButton = gui.addButton("drawNewRow")
-        .setPosition(360, y+20)
+        .setPosition(360, y+175)
         .setFont(cf1)
         .setLabel("Add")
         .plugTo(this);
@@ -184,23 +167,23 @@ public class ConfigMaker {
       if (hideButton) {
         addButton.hide();
       } else {
-        addButton.setPosition(360, y+20);
+        addButton.setPosition(360, y+175);
       }
     }
   }
 
   public void drawLabels() {
     textSize(15);
-    text("Key", x, 155);
-    text("Label", x + 70, 155);
-    text("StEve", x + 345, 155);
-    text("MEG", x + 510, 155);
+    text("Key", x, 300);
+    text("Label", x + 70, 300);
+    text("StEve", x + 345, 300);
+    text("MEG Enter na if no meg applies. Do not leave blank.", x + 510, 300);
+    text("Enter labels for any independent variables in editMe1 to editMe4. Enter na if none applies. Do not leave blank.", x, 120);
     text("EditMe1", 10, 75);
     text("EditMe2", 120, 75);
     text("EditMe3", 230, 75);
     text("EditMe4", 340, 75);
-    text("EditMe5", 450, 75);
-    text("EditMe6", 560, 75);
+   
   }
 
   public void Back() {
@@ -213,8 +196,7 @@ public class ConfigMaker {
     txtEditMe2.hide(); 
     txtEditMe3.hide(); 
     txtEditMe4.hide(); 
-    txtEditMe5.hide(); 
-    txtEditMe6.hide();
+    
     btnSave.hide(); 
     btnBack.hide();
     refreshState(Mode.SELECTOR);
@@ -241,7 +223,7 @@ public class ConfigMaker {
             output.write(r.getRowAsCSVString());
           }
           
-          output.write("2" + ", " + txtEditMe1.getText() + "," + txtEditMe2.getText() + "," + txtEditMe3.getText() + "," + txtEditMe4.getText() + "," + txtEditMe5.getText() + "," + txtEditMe6.getText() + "\n");
+          output.write("2" + ", " + txtEditMe1.getText() + "," + txtEditMe2.getText() + "," + txtEditMe3.getText() + "," + txtEditMe4.getText() + "\n");
 
           output.flush();
           output.close();
@@ -276,7 +258,7 @@ public class ConfigRow {
   }
 
   public String getRowAsCSVString() {
-    String str = "1, ";
+    String str = "1,";
     str += key.getText() + ",";
     str += label.getText() + ",";
     if (steve.getValue() == 0) {
@@ -284,8 +266,13 @@ public class ConfigRow {
     } else {
       str += "eve,";
     }
-    str += meg.getText() + "\n";
+    
+ //   if (meg.getText() ==null) {
+ //     str += "na";
+ //   } else {
+  str += meg.getText() + "\n";
     return str;
+ //   }
   }
 
   public void hide() {

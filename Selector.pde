@@ -89,7 +89,7 @@ public class Selector {
   //Video file Selection
   void videoFileSelected(File selection) {
     if (selection != null) {
-      JOptionPane.showMessageDialog(null, "File Chosen Succesfully,If needed to change click again", "File Confirmation", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+      JOptionPane.showMessageDialog(null, "File chosen succesfully. If you need to change the file click again", "File Confirmation", javax.swing.JOptionPane.INFORMATION_MESSAGE);
       if (isValidFileType(selection, new String[]{"mp4", "mov"}) == true)//**Supported Video Files {
         videoFile = selection;
       } else {//Error message

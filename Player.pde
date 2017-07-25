@@ -335,7 +335,7 @@ public class Player {
             line(m, 0,m ,565);
 
       strokeWeight(1);
-      textSize(24);
+      textSize(14);
       text(mt,25,25);
       stroke(255);
     
